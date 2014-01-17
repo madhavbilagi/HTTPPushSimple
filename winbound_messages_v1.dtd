@@ -1,0 +1,102 @@
+<!ELEMENT WIN_DELIVERY_2_SMS (SMSMESSAGE+)>
+
+<!ELEMENT SMSMESSAGE (DESTINATION_ADDR+, TEXT+, TRANSACTIONID, TYPEID, 
+    SERVICEID, COSTID, CREATIONDATETIME?, NETWORKID?, 
+    DELIVERYDATETIME?, DELIVERYRECEIPT?, EXPIRYTIME?,
+    PRIORITY?, SOURCE_ADDR?, FLASH?, BLINK?, REMOVE?, 
+    WINTRANSACTIONID?
+    )>
+
+<!ELEMENT DESTINATION_ADDR (#PCDATA)> 
+<!-- destination mobile number a full international format 
+               e.g. +447234123456 -->
+
+<!ELEMENT TEXT (#PCDATA)> 
+<!-- Message text up to 160 characters.  If greater than 160 chars
+the value will be truncated to 160 characters and sent out. -->
+
+<!ELEMENT TRANSACTIONID (#PCDATA)> 
+<!-- max. 50 characters. allocated by the third party service. 
+(Set to a constant if prefered) -->
+
+<!ELEMENT TYPEID (#PCDATA)> 
+<!-- type of message, these are defined in the client application form, 
+provides a breakdown of messages in the reports -->
+
+<!ELEMENT SERVICEID (#PCDATA)> 
+<!-- the originating service within the third party, these are defined in             
+the client application form, provides a breakdown of messages in the reports -->
+
+<!ELEMENT COSTID (#PCDATA)>
+<!-- Provides the charge band e.g. 1 = free. These are defined in the client application form -->
+
+<!ELEMENT CREATIONDATETIME (DD, MMM, YYYY, HH, MM)> 
+          <!-- Time message was created by the third party -->
+<!ELEMENT NETWORKID (#PCDATA)>
+<!-- Only used when third party decides to take responsibility of 
+validating and the network of customers. 
+In these circumstances if the NetworkID element is not present 
+or is set to 0 then the client will have agreed to trust WIN to calculate the NetworkID from :
+
+1) Look for a record of that phone numbers network on the WIN database.
+   If not found then ...
+2) Look for a match for the prefix of the phone number to an OFTEL lookup. 
+   If not found then ...
+3) If the message request is for a reverse billed msg then block message.
+
+(Free messages will never be blocked.)  
+
+For certain overseas networks an alternative approach is required for premium rate traffic : 
+A CostID must be used with Single Network Routing to the appropriate NetworkID :
+               NetworkID
+  German       87
+  Irish        50
+  Spanish      ?
+	
+-->
+
+<!ELEMENT DELIVERYRECEIPT (#PCDATA)> 
+          <!-- 0 (default) no delivery receipt , 
+          Track delivery to :
+               11                             handset
+               12                  operator + handset
+               13 win processing + operator + handset
+               14 win processing + operator
+               15                  operator
+               16 win processing
+           --> 
+
+<!ELEMENT DELIVERYDATETIME (DD, MMM, YYYY, HH, MM)> 
+          <!-- The date & time at which the message delivery required 
+               The limit on this is upto a maximum of 7 days into the future.
+          -->
+<!ELEMENT EXPIRYTIME (HH, MM)> 
+          <!-- The offset time after which to cease attempting to deliver the
+               message to a operator. Also used by the operator as an offset 
+               from the time the they received the message to the time they 
+               cease attempting to deliver the message to a phone.
+               
+               Note the network operators will limit how long they are prepared to
+               keep retrying - believed to be between 2 and 7 days.
+          -->
+
+<!ELEMENT DD (#PCDATA)>   <!-- day of month (1-31) -->
+<!ELEMENT MMM (#PCDATA)>  <!-- month description (3 character : JAN, FEB, DEC
+                                                  or numeric 1,2, .. 12 ) -->
+<!ELEMENT YYYY (#PCDATA)> <!-- year  -->
+<!ELEMENT HH (#PCDATA)>   <!-- hour of day (0-23) -->
+<!ELEMENT MM (#PCDATA)>   <!-- minute of hour (0-59) -->
+
+<!ELEMENT PRIORITY (#PCDATA)> 
+          <!-- integer 1 to 10 (1 highest) -->
+<!ELEMENT SOURCE_ADDR (#PCDATA)> 
+          <!-- 20 characters max. spoofed originator address-->
+<!ELEMENT FLASH (#PCDATA)> 
+          <!-- TRUE | FALSE place message in idle window -->
+<!ELEMENT BLINK (#PCDATA)> 
+          <!-- TRUE | FALSE blink message in inbox -->
+<!ELEMENT REMOVE (#PCDATA)> 
+          <!-- TRUE | FALSE delete message if possible -->
+<!ELEMENT WINTRANSACTIONID (#PCDATA)> 
+          <!-- if provided this should be a reference to the originating 
+               pull request from the customer.  -->

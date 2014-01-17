@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!ELEMENT WIN_TPBOUND_MESSAGES (SMSTOTP+)>
+
+<!ELEMENT SMSTOTP (SOURCE_ADDR, 
+                   TEXT, 
+                   WINTRANSACTIONID,  
+                   DESTINATION_ADDR,
+                   SERVICEID, NETWORKID, 
+                   ARRIVALDATETIME,
+                   LOCATION? )>
+
+<!ELEMENT DESTINATION_ADDR (#PCDATA)> <!-- shortcode mobile user sent the message to -->
+<!ELEMENT SOURCE_ADDR (#PCDATA)> <!-- originating mobile number in international format -->
+<!ELEMENT TEXT (#PCDATA)> <!-- Message text up to 160 characters-->
+<!ELEMENT WINTRANSACTIONID (#PCDATA)> <!-- Number allocated by WIN -->
+<!ELEMENT SERVICEID (#PCDATA)> <!-- ServiceId associated with the keyword -->
+<!ELEMENT NETWORKID (#PCDATA)>
+   <!-- The network of the mobile phone that sent the message if known Voda=1,02=2,Orange=3,TMobile=4, not known -1) -->
+
+<!ELEMENT ARRIVALDATETIME (DD, MMM, YYYY, HH, MM)> <!-- Time message arrived -->
+<!ELEMENT DD (#PCDATA)> <!-- Day of month (1-31) -->
+<!ELEMENT MMM (#PCDATA)> <!--3 character month description (JAN, FEB ... DEC) -->
+<!ELEMENT YYYY (#PCDATA)> <!-- year  -->
+<!ELEMENT HH (#PCDATA)> <!-- Hour of day (0-23) -->
+<!ELEMENT MM (#PCDATA)> <!--Minute of hour (0-59) -->
+<!ELEMENT LOCATION (#PCDATA)> <!-- 100 char max. string location of the mobile -->

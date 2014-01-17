@@ -1,0 +1,26 @@
+<!ELEMENT WIN_RECEIPTS (SMSRECEIPT+)>
+
+<!ELEMENT SMSRECEIPT (
+	SERVICEID, 
+	SOURCE_ADDR, 
+	TRANSACTIONID, 
+	STATUSID, 
+	STATUSDATETIME, 
+	TOTALFRAGMENTNO, 
+	FRAGMENTID
+)>
+<!ELEMENT SERVICEID (#PCDATA)> <!-- INT, Service IDs -->
+<!ELEMENT SOURCE_ADDR (#PCDATA)> <!-- originating mobile number in international format -->
+<!ELEMENT TRANSACTIONID (#PCDATA)> <!-- INT, Number allocated by the third party
+                                             service system to the message sent -->
+<!ELEMENT STATUSID (#PCDATA)> <!-- INT see User Guide for details -->
+<!ELEMENT STATUSDATETIME (DD, MMM, YYYY, HH, MM)> <!-- Time message arrived -->
+<!ELEMENT DD (#PCDATA)> <!-- Day of month (1-31) -->
+<!ELEMENT MMM (#PCDATA)> <!--3 character month description (JAN, FEB ... DEC) -->
+<!ELEMENT YYYY (#PCDATA)> <!-- year  -->
+<!ELEMENT HH (#PCDATA)> <!-- Hour of day (0-23) -->
+<!ELEMENT MM (#PCDATA)> <!--Minute of hour (0-59) -->
+<!ELEMENT SS (#PCDATA)> <!--Seconds of minute (0-59) -->
+
+<!ELEMENT TOTALFRAGMENTNO (#PCDATA)> <!-- INT, total number of encoded sms msgs -->
+<!ELEMENT FRAGMENTID (#PCDATA)> <!-- INT, to which encoded sms msgs number this delivery receipt relates -->

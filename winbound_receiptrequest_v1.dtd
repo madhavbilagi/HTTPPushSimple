@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!ELEMENT WIN_RECEIPTS (SMSRECEIPT+)>
+
+<!ELEMENT SMSRECEIPT (SERVICEID, TRANSACTIONID?, 
+                                DESTINATION_ADDR?, NOOFDAYS?)>
+
+<!ELEMENT SERVICEID (#PCDATA)> <!-- INT, Service Ids -->
+<!ELEMENT TRANSACTIONID (#PCDATA)> <!-- INT, Number allocated by the third party
+                                            service system to the message sent -->
+<!ELEMENT DESTINATION_ADDR (#PCDATA)> <!-- char up to 15, e.g. +441234123456 -->
+<!ELEMENT NOOFDAYS (#PCDATA)> <!-- INT, number of days of messages to consider -->
+
